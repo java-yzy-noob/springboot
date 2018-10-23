@@ -1,0 +1,52 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /management_system
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: false
+      force: true
+  thymeleaf:
+    cache: false
+  datasource:
+    name: mysql_test
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid相关配置
+    druid:
+      #监控统计拦截的filters
+      filters: stat
+      driver-class-name: com.mysql.jdbc.Driver
+      #基本属性
+      url: jdbc:mysql://192.168.13.239:3306/student?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+      username: yzy
+      password: qwerty
+      #配置初始化大小/最小/最大
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      #获取连接等待超时时间
+      max-wait: 60000
+      #间隔多久进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+      #一个连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x'
+      #空闲连接是否被回收
+      test-while-idle: true
+      #申请连接时是否检测有效性
+      test-on-borrow: false
+      #归还连接时是否检测有效性
+      test-on-return: false
+  data:
+    solr:
+      host: http://192.168.13.183:8983/solr
+mybatis:
+  #扫描了mybatis xml配置文件
+  mapper-locations: classpath:com/javasm/*/dao/*.xml
+  #config-location: classpath:mybatis-config.xml
+logging:
+  level: {root: info}

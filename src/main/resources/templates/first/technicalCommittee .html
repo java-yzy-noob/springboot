@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>科教管理系统</title>
+    <link rel="shortcut icon" th:href="@{/img/loli.jpg}">
+    <link rel="stylesheet" th:href="@{/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/css/layer.css}">
+
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <a href="/management_system/ih/goIndex"><div class="layui-logo">首页</div></a>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><p style="color: burlywood;font-size: large" >欢迎使用科教管理系统!</p></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <p id="currentTime"></p>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;" onclick="showHelp()">使用帮助</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img th:src="@{/img/loli.jpg}" class="layui-nav-img">
+                    [[${session.username}]]
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="/management_system/ih/login">注销</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;">技术委员会</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/management_system/fh/tc">技术调查</a></dd>
+                        <dd><a href="javascript:;">成员管理</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;">职工教育</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">职工管理</a></dd>
+                        <dd><a href="#" >继续教育</a></dd>
+                        <dd><a href="#" >培训会议</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">项目管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">项目档案</a></dd>
+                        <dd><a href="javascript:;">合同档案</a></dd>
+                        <dd><a href="javascript:;">科技项目成果</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">水文学会</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">学术活动</a></dd>
+                        <dd><a href="javascript:;">会员管理</a></dd>
+                        <dd><a href="javascript:;">合作项目</a></dd>
+                        <dd><a href="javascript:;">外事接待</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">职业技能培训</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">题库维护</a></dd>
+                        <dd><a href="javascript:;">查询组卷</a></dd>
+                        <dd><a href="javascript:;">考试管理</a></dd>
+                        <dd><a href="javascript:;">教材资料</a></dd>
+                        <dd><a href="javascript:;">持证人员</a></dd>
+                        <dd><a href="javascript:;">职业鉴定证书</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">统计信息</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">经费统计</a></dd>
+                        <dd><a href="javascript:;">科教总结</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">系统管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">区域管理</a></dd>
+                        <dd><a href="javascript:;">角色管理</a></dd>
+                        <dd><a href="javascript:;">菜单管理</a></dd>
+                        <dd><a href="javascript:;">用户管理</a></dd>
+                        <dd><a href="javascript:;">部门管理</a></dd>
+                        <dd><a href="javascript:;">消息管理</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">基础数据管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">单位企业名管理</a></dd>
+                        <dd><a href="javascript:;">项目类别</a></dd>
+                        <dd><a href="javascript:;">题库题目类别</a></dd>
+                        <dd><a href="javascript:;">题库知识点</a></dd>
+                        <dd><a href="javascript:;">培训方式</a></dd>
+                        <dd><a href="javascript:;">培训类别</a></dd>
+                        <dd><a href="javascript:;">专业或工勤等级</a></dd>
+                        <dd><a href="javascript:;">行政职务</a></dd>
+                        <dd><a href="javascript:;">岗位管理</a></dd>
+                        <dd><a href="javascript:;">政治面貌管理</a></dd>
+                        <dd><a href="javascript:;">民族管理</a></dd>
+                        <dd><a href="javascript:;">学位管理</a></dd>
+                        <dd><a href="javascript:;">学历管理</a></dd>
+                        <dd><a href="javascript:;">职业工种</a></dd>
+                        <dd><a href="javascript:;">题目来源</a></dd>
+                        <dd><a href="javascript:;">持证人员类型</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div id="realContent">
+
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © javasm.com
+    </div>
+</div>
+
+<script th:src="@{/js/jquery-3.3.1.js}"></script>
+<script th:src="@{/layer/layer.js}"></script>
+<script th:src="@{/js/layui.all.js}"></script>
+<script type="text/javascript">
+    layui.use('element', function(){
+        var element = layui.element;
+        // 显示时间
+        setInterval("currentTime.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+        showTechnicalReview();
+        element.render();
+    });
+
+    function showTechnicalReview() {
+        $.post(
+            "/management_system/fh/showTechnicalReview",
+            {},
+            function (backData) {
+                $("#realContent").html(backData);
+            });
+    }
+
+    function showHelp() {
+        $.post(
+            "/management_system/ih/showHelp",
+            {},
+            function (backData) {
+                $("#realContent").html(backData);
+            });
+    }
+</script>
+</body>
+</html>

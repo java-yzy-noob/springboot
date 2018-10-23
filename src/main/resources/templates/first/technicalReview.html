@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="width: 100%; height: 30px; padding-top: 5px" class="layui-bg-cyan">
+    <h2>
+        技术委员会&nbsp;&nbsp;<i class="layui-icon">&#xe65b;</i>&nbsp;&nbsp;技术审查
+    </h2>
+</div>
+<div class="layui-fluid layui-bg-gray" style="padding-top: 10px">
+
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <input type="hidden" name="limit" value="10"> <input
+                type="hidden" name="page" value="1"> <label
+                class="layui-form-label">关键字:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="theKey" id="theKey"
+                       placeholder="请输入关键字" autocomplete="off" class="layui-input">
+            </div>
+            <label class="layui-form-label">时间</label>
+            <div class="layui-input-inline" style="width: 150px;">
+                <input type="date" name="date_start" id="date_start" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 150px;">
+                <input type="date" name="date_end" id="date_end" class="layui-input">
+            </div>
+
+            <div class="layui-input-inline">
+                <button class="layui-btn" lay-submit="" lay-filter="getMsg">查询</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+
+        </div>
+    </form>
+    <table id="testTable" lay-filter="test"></table>
+
+</div>
+
+<script type="text/javascript">
+    // 渲染采购单信息表
+    layui.use('table', function() {
+        var table = layui.table;
+        // 采购单内容
+        table.render({
+            elem : '#testTable',
+            height : 560,
+            method : 'post',
+            url : '/management_system/fh/tr_data', // 数据接口
+            id: 'testTable',
+            page : true ,// 开启分页
+            toolbar:  'default', // 显示工具栏
+            cols : [
+                [ //表头
+                {field : 'uid',title : '编号',width : 150,sort : true},
+                {field : 'uname',title : '用户名',width : 100},
+                {field : 'upwd',title : '密码',width : 150,sort : true},
+                {field : 'udate',title : '注册时间',width : 250,sort : true}
+                ]
+            ]
+        });
+
+        layui.form.on('submit(getMsg)', function(data) {
+            layui.table.reload('testTable', {
+                //设定异步数据接口的额外参数
+                where: data.field
+            });
+            // 让页面不跳转
+            return false;
+        })
+    });
+
+
+
+
+
+</script>
+
+</body>
+</html>

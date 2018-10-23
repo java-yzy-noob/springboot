@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理系统</title>
+    <link rel="shortcut icon" th:href="@{/img/loli.jpg}">
+    <script th:src="@{/js/layui.all.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/css/layer.css}">
+</head>
+<body th:background="@{/img/youcan.jpg}">
+<div style="width: 500px;height: 300px;border:sandybrown 1px solid;position: absolute;left: 30%;top: 30%;background-color: #4E5465">
+    <form class="layui-form" action="goIndex" style="width: 85%" method="post">
+        <div class="layui-form-item" style="width: 100%;margin: 30px;">
+            <label class="layui-form-label">用户名:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="username" id="username" lay-verify="required" placeholder="请输入用户名" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux" id="usernameTip"></div>
+        </div>
+        <div class="layui-form-item layui-row"  style="width: 100%;margin: 30px">
+            <label class="layui-form-label">密码:</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" lay-verify="required" placeholder="请输入密码" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux" id="passwordTip"></div>
+            <div class="layui-input-block  layui-col-md8" style="margin: 20px;">
+                <button class="layui-btn" lay-submit lay-filter="formDemo" style="float: right">登录</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    layui.use('form', function () {
+        var form = layui.form;
+        form.render();
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+        });
+    });
+</script>
+
+</body>
+</html>

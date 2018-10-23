@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javasm.management_system.Dao.IDao">
+	<select id="getAllTr_data" resultType="com.javasm.management_system.Entity.TestData">
+		select uid,uname,upwd,udate from user
+        <where>
+            <if test="theKey != null and theKey != ''">
+                and uname like "%"#{theKey}"%"
+            </if>
+            <if test="date_start != null and date_end != null
+			and date_start != '' and date_end != ''">
+                and udate BETWEEN STR_TO_DATE(#{date_start},'%Y-%m-%d') and STR_TO_DATE(#{date_end},'%Y-%m-%d')
+            </if>
+        </where>
+    </select>
+	<select id="getTr_data" resultType="com.javasm.management_system.Entity.TestData">
+		select uid,uname,upwd,udate from user
+            <where>
+                <if test="theKey != null and theKey != ''">
+                    and uname like "%"#{theKey}"%"
+                </if>
+                <if test="date_start != null and date_end != null
+                and date_start != '' and date_end != ''">
+                    and udate BETWEEN STR_TO_DATE(#{date_start},'%Y-%m-%d') and STR_TO_DATE(#{date_end},'%Y-%m-%d')
+                </if>
+            </where>
+		    LIMIT #{start},#{limit}
+	</select>
+</mapper>

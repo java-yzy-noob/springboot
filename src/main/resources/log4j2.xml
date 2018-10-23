@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appenders>
+    	<!-- 控制台输出 -->
+        <console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %class %L %M - %msg%n"/>
+        </console>
+		
+		<!-- fileName：输出路径  filePattern：命名规则 -->
+        <RollingFile name="RollingFileDebug" fileName="D:/testLogs/debug.log"
+                     filePattern="D:/testLogs/$${date:yyyy-MM-dd}/debug-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+               <ThresholdFilter level="DEBUG"/>
+                <ThresholdFilter level="INFO" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <!-- 输出格式 -->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%n"/>
+            <Policies>
+                <!-- 单个日志文件的大小限制 -->
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <!-- 最多保留20个日志文件 -->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <RollingFile name="RollingFileInfo" fileName="D:/testLogs/info.log"
+                     filePattern="D:/testLogs/$${date:yyyy-MM-dd}/info-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                  <ThresholdFilter level="INFO"/>
+                  <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <!-- 输出格式 -->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <Policies>
+                <!-- SizeBasedTriggeringPolicy单个文件的大小限制 -->
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy同一个文件下的最大文件数 -->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+        
+         <RollingFile name="RollingFileWarn" fileName="D:/testLogs/warn.log"
+            filePattern="D:/testLogs/$${date:yyyy-MM}/warn-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="WARN"/>
+                <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <!--<TimeBasedTriggeringPolicy modulate="true" interval="1"/>-->
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <!--最多保留20个日志文件-->
+            <DefaultRolloverStrategy max="20" min="0" />  
+        </RollingFile>
+        
+         <RollingFile name="RollingFileError" fileName="D:/testLogs/error.log"
+            filePattern="D:/testLogs/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="ERROR"/>
+                <ThresholdFilter level="FATAL" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+               <!--<TimeBasedTriggeringPolicy modulate="true" interval="1"/>-->
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <!--最多保留20个日志文件-->
+            <DefaultRolloverStrategy max="20" min="0" />  
+        </RollingFile>
+        
+        <!-- 异步日志配置 
+        <Async name="ASYNC">
+		    <AppenderRef ref="RollingFileInfo"/>
+		    <AppenderRef ref="RollingFileWarn"/>
+	    </Async>
+        -->
+    </appenders>
+ 
+    <loggers>
+        <!--过滤掉spring和mybatis的一些无用的debug信息-->
+        <logger name="org.springframework" level="error"></logger>
+        <logger name="org.mybatis" level="error"></logger>
+        
+        <root level="all">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileDebug"/>
+            <appender-ref ref="RollingFileInfo"/>
+            <appender-ref ref="RollingFileWarn"/>
+            <appender-ref ref="RollingFileError"/>
+        </root>
+    </loggers>
+ 
+</configuration>
